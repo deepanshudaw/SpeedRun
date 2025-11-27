@@ -1,16 +1,15 @@
-📘 Wikipedia SpeedRun AI
 
-AI-powered semantic navigation through Wikipedia using embeddings, batching, and a Tkinter live GUI
+# 📘 Wikipedia SpeedRun AI
+
+AI-powered Wikipedia speedruns using semantic embeddings + a minimal Tkinter GUI.
 
 <p align="center">
-  <img src="assets/gui_demo.png" width="550">
+  <img src="assets/gui_demo.png" width="550" alt="Wikipedia SpeedRun GUI demo" />
 </p>
 
+---
 
-
-⸻
-
-🏷️ Badges
+## 🏷️ Badges
 
 <p align="left">
   <img src="https://img.shields.io/badge/Python-3.10-blue.svg" />
@@ -19,101 +18,83 @@ AI-powered semantic navigation through Wikipedia using embeddings, batching, and
   <img src="https://img.shields.io/github/last-commit/deepanshudaw/SpeedRun" />
   <img src="https://img.shields.io/github/issues/deepanshudaw/SpeedRun" />
   <img src="https://img.shields.io/github/issues-pr/deepanshudaw/SpeedRun" />
-  <img src="https://img.shields.io/badge/License-MIT-green.svg" />
 </p>
 
+---
 
+## 🧠 Overview
 
-⸻
+This project implements a **Wikipedia speedrunning agent**:
 
-🧠 Overview
+- At each step, it scrapes all outgoing links from the current article.
+- It embeds each candidate article using a **SentenceTransformer (MiniLM-L6-v2)**.
+- It chooses the next page whose embedding is **closest** to the target page.
+- It repeats until it reaches the target or gets stuck.
 
-This project implements a Wikipedia Speedrun Agent — an AI that tries to navigate from one Wikipedia page to another using semantic embeddings, not brute-force hyperlink chasing.
+You can watch it run:
 
-It uses:
-	•	MiniLM-L6-v2 sentence-transformer embeddings
-	•	Batch encoding for dramatic speedup
-	•	Scraping + link graph extraction
-	•	A full Tkinter GUI with:
-	•	live timer
-	•	live path updates (A → B → C → ...)
-	•	animated Start button
-	•	blue-themed interface
+- in a **Tkinter GUI** (live timer, live path, status labels), or  
+- in a simple **terminal interface**.
 
-Perfect as a showcase project in your AI portfolio.
+---
 
-⸻
+## 🖼️ Screenshots
 
-🌟 GUI Images
-
-🖼️ Main Interface
-
+Main GUI:
 
 <p align="center">
-  <img src="assets/gui_blue_theme.png" width="600">
+  <img src="assets/gui_blue_theme.png" width="600" alt="Main GUI" />
 </p>
 
-
-
-⸻
-
-🖼️ Live Speedrun
+Speedrun in progress:
 
 <p align="center">
-  <img src="assets/gui_running.png" width="600">
+  <img src="assets/gui_running.png" width="600" alt="Speedrun running" />
 </p>
 
-
-
-⸻
-
-🖼️ Path Visualization
+Live path preview:
 
 <p align="center">
-  <img src="assets/path_demo.png" width="600">
+  <img src="assets/path_demo.png" width="600" alt="Path preview" />
 </p>
 
+---
 
+## 🚀 Features
 
-⸻
+- **Semantic navigation**  
+  - Each hop is chosen via cosine similarity  
+    \[
+    \text{next} = \arg\max \cos(\text{embedding(link)}, \text{embedding(target)})
+    \]
 
-🚀 Features
+- **Live GUI**  
+  - Current page, step, links clicked  
+  - Live timer from start to finish  
+  - Path display like:  
+    `One_Piece → Burger_King → Hamburger → …`
 
-✔️ AI-driven semantic navigation
+- **Optimised pipeline**  
+  - Batched embedding (single model call per step)  
+  - HTML + embedding caching  
+  - Target embedding computed once per run  
 
-Each hop is chosen via cosine similarity:
+---
 
-next = argmax ( cosine(embedding(link), embedding(target)) )
+## 📂 Project Structure
 
-✔️ Real-time GUI
-	•	live timer
-	•	current page status
-	•	dynamic path chain
-	•	animated button interactions
-	•	blue theme
-
-✔️ Highly optimized
-	•	Batch embedding (1 model call instead of 100 per step)
-	•	HTML caching
-	•	Embedding caching
-	•	Target embedding computed once
-
-⸻
-
-📂 Project Structure
-
+```text
 SpeedRun/
-│
-├── scraping.py          # Wikipedia scraping
-├── embeddings.py        # Batched transformer embeddings + caching
-├── speedrun.py          # Core navigation logic
-├── game_speedrun.py     # Terminal "live" version
-├── tk_speedrun.py       # Tkinter GUI with timer + animations
-├── assets/              # <-- put your screenshots here
-│    ├── gui_demo.png
-│    ├── gui_running.png
-│    └── path_demo.png
-│
+├── scraping.py        # Wikipedia HTML fetch + link extraction
+├── embeddings.py      # SentenceTransformer loading, caching, batched encoding
+├── speedrun.py        # Core navigation logic (choose_next_link, speedrun)
+├── game_speedrun.py   # Terminal-based live speedrun
+├── tk_speedrun.py     # Tkinter GUI with live timer + path
+├── assets/            # Screenshots used in README
+│   ├── gui_demo.png
+│   ├── gui_blue_theme.png
+│   ├── gui_running.png
+│   └── path_demo.png
 └── README.md
 
 
@@ -125,6 +106,14 @@ python3 -m venv .venv
 source .venv/bin/activate
 pip install -r requirements.txt
 
+If you don’t have a requirements.txt yet, a minimal one would be:
+
+sentence-transformers
+numpy
+beautifulsoup4
+requests
+
+(Tkinter is included with most Python installs on macOS/Linux.)
 
 ⸻
 
@@ -132,49 +121,74 @@ pip install -r requirements.txt
 
 python tk_speedrun.py
 
+Then in the window:
+	•	Set Source Page (e.g., One Piece)
+	•	Set Target Page (e.g., Burger King)
+	•	Click Start Speedrun
+
+You’ll see:
+	•	Current page
+	•	Step number
+	•	Links clicked
+	•	Elapsed time
+	•	The path evolving live in the text box.
 
 ⸻
 
-▶️ Running Terminal Version
+▶️ Running the Terminal Version
 
 python game_speedrun.py
 
+This prints:
+	•	current article
+	•	number of links clicked so far
+	•	elapsed time
+	•	final path at the end.
 
 ⸻
 
-🧠 Technical Walkthrough
+🧪 Technical Walkthrough
 
 Embeddings
-	•	Extracts intro paragraphs using BeautifulSoup
-	•	Encodes them using MiniLM-L6-v2
-	•	384-dimensional vectors
+	•	Uses sentence-transformers with all-MiniLM-L6-v2.
+	•	For each page:
+	•	Fetch HTML via requests
+	•	Extract 1–2 intro paragraphs with BeautifulSoup
+	•	Encode intro text to a 384-dimensional vector
 
 Batching
 
-All candidate links are embedded at once:
+Instead of encoding each candidate link separately, links are batched:
 
-model.encode(list_of_texts, batch_size=32)
+embeddings = model.encode(texts, batch_size=32)
 
-This is the single largest performance gain.
+This significantly reduces overhead when a page has many links.
 
-Navigation
-	•	Greedy semantic search
-	•	Avoids revisiting pages
-	•	Stops on loops, dead ends, or max steps
-
-⸻
-
-📈 Future Enhancements
-	•	Beam search for multi-path exploration
-	•	Streamlit web interface
-	•	Real-time graph visualization
-	•	Audio effects (link click, success, failure)
-	•	Speed leaderboard
-	•	GPT-powered reasoning mode
+Navigation Logic
+	1.	Compute target embedding once.
+	2.	For current page:
+	•	scrape outgoing links
+	•	fetch + embed candidates (batched, cached)
+	•	compute cosine similarity to target
+	•	pick best-scoring link
+	3.	Stop when:
+	•	target reached
+	•	max steps exceeded
+	•	or we hit loops / no candidates.
 
 ⸻
 
-🧑‍💻 Author
+🧭 Possible Extensions
+	•	Beam search or multi-path exploration
+	•	Pre-crawled subgraph of Wikipedia in a local DB / graph DB
+	•	Streamlit web UI
+	•	Visual graph of the path
+	•	Heuristics to avoid “topic dead-ends”
+	•	Compare greedy vs random vs BFS shortest path
+
+⸻
+
+✍️ Author
 
 Deepanshu Dawande
-AI/ML Engineer • LLM Systems Developer
+AI / ML Engineer • LLM Systems & Tooling
