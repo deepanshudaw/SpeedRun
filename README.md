@@ -63,9 +63,7 @@ Live path preview:
 
 - **Semantic navigation**  
   - Each hop is chosen via cosine similarity  
-    \[
-    \text{next} = \arg\max \cos(\text{embedding(link)}, \text{embedding(target)})
-    \]
+<img src="https://towardsdatascience.com/wp-content/uploads/2020/09/1LfW66-WsYkFqWc4XYJbEJg.png" width="600" alt="Wikipedia link graph example">
 
 - **Live GUI**  
   - Current page, step, links clicked  
