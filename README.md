@@ -1,4 +1,4 @@
-# 📘 Wikipedia SpeedRun AI
+# Wikipedia SpeedRun Game
 
 AI-powered Wikipedia speedruns using semantic embeddings + a minimal Tkinter GUI.
 
@@ -6,6 +6,7 @@ AI-powered Wikipedia speedruns using semantic embeddings + a minimal Tkinter GUI
   <img src="assets/gui_demo.png" width="550" alt="Wikipedia SpeedRun GUI demo" />
 </p>
 
+**Live demo:** [Open the web app](https://speedrun-lp8o8zlgqc8w8dbzzor6aw.streamlit.app/)
 ---
 
 ## 🏷️ Badges
@@ -21,7 +22,7 @@ AI-powered Wikipedia speedruns using semantic embeddings + a minimal Tkinter GUI
 
 ---
 
-## 🧠 Overview
+## Overview
 
 This project implements a **Wikipedia speedrunning agent**:
 
@@ -37,7 +38,7 @@ You can watch it run:
 
 ---
 
-## 🖼️ Screenshots
+## Screenshots
 
 Main GUI:
 
@@ -59,7 +60,7 @@ Live path preview:
 
 ---
 
-## 🚀 Features
+## Features
 
 - **Semantic navigation**  
   - Each hop is chosen via cosine similarity  
@@ -137,7 +138,7 @@ This prints:
 
 ⸻
 
-🧪 Technical Walkthrough
+Technical Walkthrough
 
 Embeddings
 	•	Uses sentence-transformers with all-MiniLM-L6-v2.
@@ -165,18 +166,6 @@ Navigation Logic
 	•	target reached
 	•	max steps exceeded
 	•	or we hit loops / no candidates.
-
-⸻
-
-🧭 Possible Extensions
-	•	Beam search or multi-path exploration
-	•	Pre-crawled subgraph of Wikipedia in a local DB / graph DB
-	•	Streamlit web UI
-	•	Visual graph of the path
-	•	Heuristics to avoid “topic dead-ends”
-	•	Compare greedy vs random vs BFS shortest path
-
-⸻
 
 ✍️ Author
 
