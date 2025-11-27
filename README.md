@@ -1,4 +1,3 @@
-
 # 📘 Wikipedia SpeedRun AI
 
 AI-powered Wikipedia speedruns using semantic embeddings + a minimal Tkinter GUI.
@@ -106,14 +105,7 @@ python3 -m venv .venv
 source .venv/bin/activate
 pip install -r requirements.txt
 
-If you don’t have a requirements.txt yet, a minimal one would be:
-
-sentence-transformers
-numpy
-beautifulsoup4
-requests
-
-(Tkinter is included with most Python installs on macOS/Linux.)
+A `requirements.txt` is included at the project root.
 
 ⸻
 
