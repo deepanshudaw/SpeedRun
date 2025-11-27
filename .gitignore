@@ -1,0 +1,15 @@
+
+# Python
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.venv/
+env/
+venv/
+# macOS files
+.DS_Store
+# Models or cached embeddings if any
+*.npz
+*.pickle
+
