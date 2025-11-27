@@ -19,30 +19,23 @@ MAX_LINKS = 50
 class SpeedrunGUI:
     def __init__(self, root):
         self.root = root
-        root.configure(bg="#dceaff")
         root.title("Wikipedia Speedrun")
 
         # ---------------- UI Layout ----------------
-        tk.Label(root, text="Source Page:", bg="#dceaff", fg="#003366").grid(row=0, column=0, sticky="w")
-        self.src_entry = tk.Entry(root, width=40, bg="#eef5ff", fg="#003366", insertbackground="#003366")
+        tk.Label(root, text="Source Page:").grid(row=0, column=0, sticky="w")
+        self.src_entry = tk.Entry(root, width=40)
         self.src_entry.insert(0, START_TITLE)
         self.src_entry.grid(row=0, column=1, padx=5, pady=5)
 
-        tk.Label(root, text="Target Page:", bg="#dceaff", fg="#003366").grid(row=1, column=0, sticky="w")
-        self.tgt_entry = tk.Entry(root, width=40, bg="#eef5ff", fg="#003366", insertbackground="#003366")
+        tk.Label(root, text="Target Page:").grid(row=1, column=0, sticky="w")
+        self.tgt_entry = tk.Entry(root, width=40)
         self.tgt_entry.insert(0, TARGET_TITLE)
         self.tgt_entry.grid(row=1, column=1, padx=5, pady=5)
 
         self.start_button = tk.Button(
             root,
             text="Start Speedrun",
-            command=self.start_speedrun_thread,
-            bg="#4d88ff",
-            fg="white",
-            activebackground="#3366cc",
-            activeforeground="white",
-            relief="raised",
-            bd=2
+            command=self.start_speedrun_thread
         )
         self.start_button.grid(row=2, column=0, columnspan=2, pady=10)
 
@@ -57,31 +50,27 @@ class SpeedrunGUI:
             "elapsed": tk.StringVar(),
         }
 
-        tk.Label(root, text="Current Page:", bg="#dceaff", fg="#003366").grid(row=4, column=0, sticky="w")
-        tk.Label(root, textvariable=self.status_vars["current"], bg="#dceaff", fg="#003366").grid(row=4, column=1, sticky="w")
+        tk.Label(root, text="Current Page:").grid(row=4, column=0, sticky="w")
+        tk.Label(root, textvariable=self.status_vars["current"]).grid(row=4, column=1, sticky="w")
 
-        tk.Label(root, text="Step:", bg="#dceaff", fg="#003366").grid(row=5, column=0, sticky="w")
-        tk.Label(root, textvariable=self.status_vars["step"], bg="#dceaff", fg="#003366").grid(row=5, column=1, sticky="w")
+        tk.Label(root, text="Step:").grid(row=5, column=0, sticky="w")
+        tk.Label(root, textvariable=self.status_vars["step"]).grid(row=5, column=1, sticky="w")
 
-        tk.Label(root, text="Links Clicked:", bg="#dceaff", fg="#003366").grid(row=6, column=0, sticky="w")
-        tk.Label(root, textvariable=self.status_vars["links"], bg="#dceaff", fg="#003366").grid(row=6, column=1, sticky="w")
+        tk.Label(root, text="Links Clicked:").grid(row=6, column=0, sticky="w")
+        tk.Label(root, textvariable=self.status_vars["links"]).grid(row=6, column=1, sticky="w")
 
-        tk.Label(root, text="Elapsed Time:", bg="#dceaff", fg="#003366").grid(row=7, column=0, sticky="w")
-        tk.Label(root, textvariable=self.status_vars["elapsed"], bg="#dceaff", fg="#003366").grid(row=7, column=1, sticky="w")
+        tk.Label(root, text="Elapsed Time:").grid(row=7, column=0, sticky="w")
+        tk.Label(root, textvariable=self.status_vars["elapsed"]).grid(row=7, column=1, sticky="w")
 
-        tk.Label(root, text="Path Taken:", bg="#dceaff", fg="#003366").grid(row=8, column=0, sticky="nw")
-        self.path_text = tk.Text(root, width=50, height=10, bg="#f0f6ff", fg="#003366")
+        tk.Label(root, text="Path Taken:").grid(row=8, column=0, sticky="nw")
+        self.path_text = tk.Text(root, width=50, height=10)
         self.path_text.grid(row=8, column=1, padx=5, pady=10)
 
         # Timer state
         self.timer_running = False
         self.start_time = None
 
-        # Style effects for the start button
-        self.start_button.bind("<Enter>", self._on_start_hover)
-        self.start_button.bind("<Leave>", self._on_start_leave)
-        self.start_button.bind("<ButtonPress-1>", self._on_start_press)
-        self.start_button.bind("<ButtonRelease-1>", self._on_start_release)
+        # Hover/click styling disabled
 
     # ---------------- Thread Wrapper ----------------
     def start_speedrun_thread(self):
@@ -106,16 +95,16 @@ class SpeedrunGUI:
         self.root.after(100, self.update_timer)
 
     def _on_start_hover(self, event):
-        self.start_button.config(bg="#5a94ff")
+        pass
 
     def _on_start_leave(self, event):
-        self.start_button.config(bg="#4d88ff")
+        pass
 
     def _on_start_press(self, event):
-        self.start_button.config(bg="#3366cc")
+        pass
 
     def _on_start_release(self, event):
-        self.start_button.config(bg="#5a94ff")
+        pass
 
     # ---------------- Core Logic ----------------
     def speedrun(self):
