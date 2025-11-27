@@ -48,7 +48,6 @@ Perfect as a showcase project in your AI portfolio.
 
 🖼️ Main Interface
 
-(Replace the placeholder paths with your own screenshots)
 
 <p align="center">
   <img src="assets/gui_blue_theme.png" width="600">
